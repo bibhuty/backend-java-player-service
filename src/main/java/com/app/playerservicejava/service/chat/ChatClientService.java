@@ -24,8 +24,7 @@ public class ChatClientService {
     private OllamaAPI ollamaAPI;
 
     public List<Model> listModels() throws OllamaBaseException, IOException, URISyntaxException, InterruptedException {
-        List<Model> models = ollamaAPI.listModels();
-        return models;
+        return ollamaAPI.listModels();
     }
 
     public String chat() throws OllamaBaseException, IOException, InterruptedException {
@@ -41,4 +40,7 @@ public class ChatClientService {
         return response.getResponse();
     }
 
+    public void ping() {
+        ollamaAPI.ping();
+    }
 }

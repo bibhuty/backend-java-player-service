@@ -6,8 +6,11 @@ import com.app.playerservicejava.repository.PlayerRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,6 +39,20 @@ public class PlayerService {
             return Optional.empty();
         }
         return player;
+    }
+
+    public Players findPlayerByIds(List<String> playerIds) {
+        var players = new Players();
+        players.setPlayers(playerRepository.findAllById(playerIds));
+        return players;
+    }
+
+    public List<Player> findAllPlayersByBirthMonthAndYear(String birthMonth, String birthYear) {
+        return playerRepository.findAllByBirthMonthAndBirthYear(birthMonth, birthYear);
+    }
+
+    public Page<Player> findAllPlayersByBirthMonthAndYear(String birthMonth, String birthYear, Pageable pageable) {
+        return playerRepository.findAllByBirthMonthAndBirthYear(birthMonth, birthYear, pageable);
     }
 
 }

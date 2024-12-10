@@ -135,7 +135,8 @@ def team_feedback(body: TeamFeedbackInput) -> TeamFeedbackOutput:
     return TeamFeedbackOutput(
         seed_id=seed_id,
         member_id=member_id,
-        accepted=accepted
+        accepted=accepted,
+        prediction_id=str(uuid.uuid4()),
     )
 
 
