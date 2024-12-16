@@ -22,7 +22,7 @@ server:
   error:
     include-message: always
 
-logging:
-  level:
-    root: INFO
-    org.springframework: DEBUG
+#logging:
+#  level:
+#    root: INFO
+#    org.springframework: DEBUG

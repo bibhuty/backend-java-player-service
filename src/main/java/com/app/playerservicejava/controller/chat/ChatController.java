@@ -1,9 +1,7 @@
 package com.app.playerservicejava.controller.chat;
 
-import com.app.playerservicejava.model.request.GenerateTeamRequest;
-import com.app.playerservicejava.model.response.GeneratedTeamResponse;
+import com.app.playerservicejava.model.request.TalkToLLM;
 import com.app.playerservicejava.service.chat.ChatClientService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.github.ollama4j.exceptions.OllamaBaseException;
 import io.github.ollama4j.models.Model;
 import org.slf4j.Logger;
@@ -13,7 +11,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -28,11 +25,8 @@ public class ChatController {
     @Autowired
     private ChatClientService chatClientService;
 
-    @Autowired
-    private RestTemplate restTemplate;
-
     @PostMapping
-    public @ResponseBody String chat() throws OllamaBaseException, IOException, InterruptedException {
+    public @ResponseBody String chat() throws OllamaBaseException, IOException, InterruptedException, URISyntaxException {
         return chatClientService.chat();
     }
 
@@ -48,10 +42,9 @@ public class ChatController {
         return ResponseEntity.ok("pong");
     }
 
-    @PostMapping("/generate-team")
-    public ResponseEntity<GeneratedTeamResponse> generateTeam(@RequestBody GenerateTeamRequest request) throws IOException {
-        ResponseEntity<String> response = restTemplate.postForEntity("http://127.0.0.1:5001/team/generate", request, String.class);
-        ObjectMapper objectMapper = new ObjectMapper();
-        return ResponseEntity.ok(objectMapper.readValue(response.getBody(), GeneratedTeamResponse.class));
+    @PostMapping("/talk-to-llm")
+    public ResponseEntity<String> talk(@RequestBody TalkToLLM request) throws OllamaBaseException, IOException, InterruptedException, URISyntaxException {
+        return ResponseEntity.ok(chatClientService.talkToLLM(request));
     }
+
 }
