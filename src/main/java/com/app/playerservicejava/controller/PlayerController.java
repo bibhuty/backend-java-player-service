@@ -57,4 +57,10 @@ public class PlayerController {
     public ResponseEntity<Page<Player>> findByBirthMonthAndYearPaginated(@RequestParam String month, @RequestParam String year, @RequestParam int page, @RequestParam int size, @RequestParam(required = false) String sort) {
         return ok(playerService.findAllPlayersByBirthMonthAndYear(month,year, PageRequest.of(page,size,Sort.Direction.ASC,sort)));
     }
+
+    @GetMapping("/test")
+    public ResponseEntity<Players> test() {
+        return new ResponseEntity<>(playerService.test(), HttpStatus.OK);
+    }
+
 }

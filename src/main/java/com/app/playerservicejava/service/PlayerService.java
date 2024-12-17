@@ -55,4 +55,12 @@ public class PlayerService {
         return playerRepository.findAllByBirthMonthAndBirthYear(birthMonth, birthYear, pageable);
     }
 
+    public Players test() {
+
+        return null;
+    }
+
+    public List<Player> findActiveRetiredPlayers() {
+        return playerRepository.findActiveRetiredPlayers();
+    }
 }

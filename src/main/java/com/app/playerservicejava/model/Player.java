@@ -273,4 +273,34 @@ public class Player {
     public void setBbrefId(String bbrefId) {
         this.bbrefId = bbrefId;
     }
+
+    @Override
+    public String toString() {
+        return "Player{" +
+                "playerId='" + playerId + '\'' +
+                ", birthYear='" + birthYear + '\'' +
+                ", birthMonth='" + birthMonth + '\'' +
+                ", birthDay='" + birthDay + '\'' +
+                ", birthCountry='" + birthCountry + '\'' +
+                ", birthState='" + birthState + '\'' +
+                ", birthCity='" + birthCity + '\'' +
+                ", deathYear='" + deathYear + '\'' +
+                ", deathMonth='" + deathMonth + '\'' +
+                ", deathDay='" + deathDay + '\'' +
+                ", deathCountry='" + deathCountry + '\'' +
+                ", deathState='" + deathState + '\'' +
+                ", deathCity='" + deathCity + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", givenName='" + givenName + '\'' +
+                ", weight='" + weight + '\'' +
+                ", height='" + height + '\'' +
+                ", bats='" + bats + '\'' +
+                ", throwStats='" + throwStats + '\'' +
+                ", debut='" + debut + '\'' +
+                ", finalGame='" + finalGame + '\'' +
+                ", retroId='" + retroId + '\'' +
+                ", bbrefId='" + bbrefId + '\'' +
+                '}';
+    }
 }

@@ -35,15 +35,18 @@ public class ChatClientService {
     }
 
     public String chat() throws OllamaBaseException, IOException, InterruptedException, URISyntaxException {
-        String model = OllamaModelType.TINYLLAMA;
-        ollamaAPI.pullModel(model);
+        ollamaAPI.pullModel(OllamaModelType.TINYLLAMA);
         // https://ollama4j.github.io/ollama4j/intro
+        return getPromptResponse("Recite a haiku about recursion.");
+    }
+
+    public String getPromptResponse(String text) throws OllamaBaseException, IOException, InterruptedException {
         PromptBuilder promptBuilder =
                 new PromptBuilder()
-                        .addLine("Recite a haiku about recursion.");
+                        .add(text);
 
         boolean raw = false;
-        OllamaResult response = ollamaAPI.generate(model, promptBuilder.build(), raw, new OptionsBuilder().build());
+        OllamaResult response = ollamaAPI.generate(OllamaModelType.TINYLLAMA, promptBuilder.build(), raw, new OptionsBuilder().build());
         return response.getResponse();
     }
 
