@@ -1,5 +1,6 @@
 package com.app.playerservicejava.controller.chat;
 
+import com.app.playerservicejava.model.request.TalkToLLM;
 import com.app.playerservicejava.service.chat.ChatClientService;
 import io.github.ollama4j.exceptions.OllamaBaseException;
 import io.github.ollama4j.models.Model;
@@ -9,10 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -28,7 +26,7 @@ public class ChatController {
     private ChatClientService chatClientService;
 
     @PostMapping
-    public @ResponseBody String chat() throws OllamaBaseException, IOException, InterruptedException {
+    public @ResponseBody String chat() throws OllamaBaseException, IOException, InterruptedException, URISyntaxException {
         return chatClientService.chat();
     }
 
@@ -37,4 +35,16 @@ public class ChatController {
         List<Model> models = chatClientService.listModels();
         return ResponseEntity.ok(models);
     }
+
+    @GetMapping("/ping")
+    public ResponseEntity<String> ping() throws OllamaBaseException, IOException, InterruptedException {
+        chatClientService.ping();
+        return ResponseEntity.ok("pong");
+    }
+
+    @PostMapping("/talk-to-llm")
+    public ResponseEntity<String> talk(@RequestBody TalkToLLM request) throws OllamaBaseException, IOException, InterruptedException, URISyntaxException {
+        return ResponseEntity.ok(chatClientService.talkToLLM(request));
+    }
+
 }

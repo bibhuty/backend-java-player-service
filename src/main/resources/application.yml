@@ -10,6 +10,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
   config:
     use-legacy-processing: true
   h2:
@@ -22,4 +23,7 @@ server:
   error:
     include-message: always
 
-
+#logging:
+#  level:
+#    root: INFO
+#    org.springframework: DEBUG
