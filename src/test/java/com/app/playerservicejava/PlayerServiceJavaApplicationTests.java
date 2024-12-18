@@ -1,6 +1,8 @@
 package com.app.playerservicejava;
 
 import com.app.playerservicejava.model.Player;
+import com.app.playerservicejava.model.Players;
+import com.app.playerservicejava.model.response.PlayerNamesResponse;
 import com.app.playerservicejava.repository.PlayerRepository;
 import com.app.playerservicejava.service.PlayerService;
 import com.app.playerservicejava.service.chat.ChatClientService;
@@ -11,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 
@@ -67,4 +70,13 @@ class PlayerServiceJavaApplicationTests {
         System.out.println(chatClientService.getPromptResponse("What do you think about this player?"+ aaronto01));;
     }
 
+    @Test
+    void getAllOrSelectedFieldsForPlayersInAGenericWay(){
+        Collection<Player> players =
+                playerRepository.findByLastName("Aaron", Player.class);
+        System.out.println(players);
+        Collection<PlayerNamesResponse> playerNamesResponses =
+                playerRepository.findByLastName("Aaron", PlayerNamesResponse.class);
+        System.out.println(playerNamesResponses);
+    }
 }

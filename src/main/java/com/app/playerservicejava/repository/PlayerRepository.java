@@ -8,6 +8,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.Collection;
 import java.util.List;
 
 public interface PlayerRepository extends JpaRepository<Player, String> {
@@ -29,4 +30,5 @@ public interface PlayerRepository extends JpaRepository<Player, String> {
             nativeQuery = true
     )
     int deletePlayersByNameGiven(@Param("nameGiven") String nameGiven);
+    <T> Collection<T> findByLastName(String lastName, Class<T> type);
 }
